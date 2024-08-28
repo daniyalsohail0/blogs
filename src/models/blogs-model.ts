@@ -12,6 +12,7 @@ export interface Blog extends Document {
   content: string;
   featuredImage: string;
   categories: string[];
+  comments: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -45,7 +46,8 @@ const blogSchema = new Schema<Blog>(
     },
     permalink: {
       type: String,
-      required: true,
+      unique: true,
+      required: true
     },
     content: {
       type: String,
@@ -59,6 +61,9 @@ const blogSchema = new Schema<Blog>(
       type: [String],
       required: true,
     },
+    comments: {
+      type: [String],
+    }
   },
   {
     timestamps: true,
